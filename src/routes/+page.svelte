@@ -1,18 +1,23 @@
 <script>
   import Button from "../components/Button.svelte";
-  import Container from "../components/Container.svelte";
+  import Input from '../components/Input.svelte';
+
 </script>
 <body>
-  <Container>
-    <Button buttonText="Olá chatgpt" backgroundColor="#fff000"/>
-  </Container>
+  <form>
+    <Input />
+    <!-- <Button buttonText="Criar" backgroundColor="#fff000"/>  -->
+  </form>
 </body>
 
 <style>
 body {
-  font: 16px "Helvetica Neue", Arial, sans-serif;
   height: 100vh;
   background-color: #f0f0f0;
+}
+
+form {
+  margin: 10px auto;
 }
 
 /* reset de css */
