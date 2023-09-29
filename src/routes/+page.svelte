@@ -1,28 +1,33 @@
 <script>
-  import Button from "../components/Button.svelte";
-  import Input from '../components/Input.svelte';
-  import { createTodo } from "../services/create/createTodoService"
-
-  const handleMessage = async () => {
-    await createTodo({title: "DISPATCH", description: "Dispatch test"})
-  }
+  // import { createTodo } from "../services/create/createTodoService"
+  import NewTodo from "../components/NewTodo.svelte";
 
 </script>
 <body>
-  <form>
-    <Input />
-    <Button on:onClick={handleMessage} buttonText="Criar" backgroundColor="#fff000" /> 
-  </form>
+  <NewTodo />
 </body>
 
 <style>
-body {
-  height: 100vh;
-  background-color: #f0f0f0;
+
+:root {
+  --white: #fff;
+  --gray-100: #e1e1e6;
+  --gray-300: #c4c4cc;
+  --gray-400: #8d8d99;
+  --gray-600: #323238;
+  --gray-700: #29292e;
+  --gray-800: #202024;
+  --gray-900: #121214;
+
+  --green-300: #00B37E;
+  --green-500: #00875f;
 }
 
-form {
-  margin: 10px auto;
+body {
+  height: 100vh;
+  background: var(--gray-600);
+  color: var(--gray-300);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* reset de css */
