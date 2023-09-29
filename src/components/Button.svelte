@@ -1,10 +1,15 @@
 <script lang="ts">
-  export let buttonText = "Click";
-  export let backgroundColor = "white";
-  
-  function handleClick() {
-    //functionality
-  }
+  import { createEventDispatcher } from "svelte"
+  export let buttonText = "Click"
+  export let backgroundColor = "white"
+
+  const dispatch = createEventDispatcher();
+
+  const handleClick = (): void => {
+    dispatch('onClick', {
+      text: 'clicked'
+    })
+  } 
 </script>
 
 <button class="button" on:click={handleClick} style:background-color={backgroundColor}>

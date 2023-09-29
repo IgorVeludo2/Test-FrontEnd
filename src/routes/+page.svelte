@@ -1,12 +1,17 @@
 <script>
   import Button from "../components/Button.svelte";
   import Input from '../components/Input.svelte';
+  import { createTodo } from "../services/create/createTodoService"
+
+  const handleMessage = async () => {
+    await createTodo({title: "DISPATCH", description: "Dispatch test"})
+  }
 
 </script>
 <body>
   <form>
     <Input />
-    <!-- <Button buttonText="Criar" backgroundColor="#fff000"/>  -->
+    <Button on:onClick={handleMessage} buttonText="Criar" backgroundColor="#fff000" /> 
   </form>
 </body>
 
