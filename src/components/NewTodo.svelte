@@ -9,7 +9,8 @@
     description = description.trim()
 
     if([title.trim(), description.trim()].includes('') ) {
-      console.log("IF DE MILHOES")
+      alert("Preencha título e descrição para poder criar uma nova nota!")
+      return
     }
     const data = {
       title,
@@ -128,7 +129,7 @@
   
   .separator {
     width: 100%;
-    border-bottom: 1px solid rgb(63, 63, 67);
+    border-bottom: .1px solid rgb(63, 63, 67);
     height: 1px;
     margin: 10px 0px;
   }

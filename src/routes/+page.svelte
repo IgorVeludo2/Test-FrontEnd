@@ -1,5 +1,4 @@
 <script>
-  // import { createTodo } from "../services/create/createTodoService"
   import NewTodo from "../components/NewTodo.svelte";
 
 </script>
