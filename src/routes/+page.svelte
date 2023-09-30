@@ -2,40 +2,52 @@
   import { onMount } from "svelte"
   import NewTodo from "../components/NewTodo.svelte"
   import { getAll } from "../services/get/getTodoService"
-  import { createTodo } from "../services/create/createTodoService";
-  import type { ICreateToDo } from "../types";
+  import Card from "../components/Card.svelte"
+  import { createTodo } from "../services/create/createTodoService"
+  import type { ICreateToDo } from "../types"
 
-  const todoList: Array<object> = []
-
-  interface IResponse {
-    [error: string]: any
-  }
+  let todoList: Array<any> = []
 
   const addTodo = async (event: CustomEvent<ICreateToDo>) => {
     const {title, description} = event.detail
     await createTodo({title, description})
   }
 
+  function openEditCardModal(id: string) {
+    alert(id)
+  }
+
   onMount(async () => {
     try {
-      const response: IResponse = await getAll()
+      const response = await getAll()
       if(response.hasOwnProperty('error')) {
         alert("Não foi possível realizar a requisição")
         return
       }
-      todoList.push(response)
+      todoList = [...response]
     }catch(error) {
       alert(`Error: ${error}`)
+      return
     }
   })
 
 </script>
 <body>
   <NewTodo on:createTodo={addTodo}/>
+  {#each todoList as card}
+    <div class="wrapper">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div class="box"
+        on:click={() => teste(card.id)}
+      > 
+        <Card {card}/>
+      </div>
+    </div>
+  {/each}
 </body>
 
 <style>
-
 :root {
   --white: #fff;
   --gray-100: #e1e1e6;
@@ -48,10 +60,27 @@
 }
 
 body {
+  padding: 8px;
   height: 100vh;
   background: var(--gray-600);
   color: var(--gray-300);
   -webkit-font-smoothing: antialiased;
+}
+
+.wrapper {
+  display: grid;
+  margin: 10px auto;
+  cursor: pointer;
+  border: 1px solid green;
+}
+
+.box {
+  /* display: inline-grid; */
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 18px;
 }
 
 /* reset de css */

@@ -10,3 +10,8 @@ export interface ITodoList {
   isDone: boolean;
   deleteToDo: boolean;
 }
+
+export type Card = {
+  title: string;
+  description: string;
+}
