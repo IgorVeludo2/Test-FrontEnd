@@ -2,11 +2,18 @@
   import { onMount } from "svelte"
   import NewTodo from "../components/NewTodo.svelte"
   import { getAll } from "../services/get/getTodoService"
+  import { createTodo } from "../services/create/createTodoService";
+  import type { ICreateToDo } from "../types";
 
   const todoList: Array<object> = []
 
   interface IResponse {
     [error: string]: any
+  }
+
+  const addTodo = async (event: CustomEvent<ICreateToDo>) => {
+    const {title, description} = event.detail
+    await createTodo({title, description})
   }
 
   onMount(async () => {
@@ -24,7 +31,7 @@
 
 </script>
 <body>
-  <NewTodo />
+  <NewTodo on:createTodo={addTodo}/>
 </body>
 
 <style>

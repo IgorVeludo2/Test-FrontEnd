@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { createTodo } from '../services/create/createTodoService'
-
+	import { createEventDispatcher } from 'svelte'
+  
   let title = ''
   let description = ''
+
+  const dispatch = createEventDispatcher<{createTodo: { title: string, description: string }}>()
 
   async function handleAddNewTodo() {
     title = title.trim()
@@ -12,12 +14,15 @@
       alert("Preencha título e descrição para poder criar uma nova nota!")
       return
     }
-    const data = {
-      title,
-      description
-    }
 
-    await createTodo(data)
+    dispatch("createTodo", { title, description})
+
+    // const data = {
+    //   title,
+    //   description
+    // }
+
+    // await createTodo(data)
 
     title = ''
     description = ''
