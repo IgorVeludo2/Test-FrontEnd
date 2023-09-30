@@ -1,5 +1,26 @@
-<script>
-  import NewTodo from "../components/NewTodo.svelte";
+<script lang="ts">
+  import { onMount } from "svelte"
+  import NewTodo from "../components/NewTodo.svelte"
+  import { getAll } from "../services/get/getTodoService"
+
+  const todoList: Array<object> = []
+
+  interface IResponse {
+    [error: string]: any
+  }
+
+  onMount(async () => {
+    try {
+      const response: IResponse = await getAll()
+      if(response.hasOwnProperty('error')) {
+        alert("Não foi possível realizar a requisição")
+        return
+      }
+      todoList.push(response)
+    }catch(error) {
+      alert(`Error: ${error}`)
+    }
+  })
 
 </script>
 <body>
@@ -17,9 +38,6 @@
   --gray-700: #29292e;
   --gray-800: #202024;
   --gray-900: #121214;
-
-  --green-300: #00B37E;
-  --green-500: #00875f;
 }
 
 body {
